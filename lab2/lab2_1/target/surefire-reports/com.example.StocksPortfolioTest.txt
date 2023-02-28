@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: com.example.StocksPortfolioTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.012 s <<< FAILURE! - in com.example.StocksPortfolioTest
+getTotalValue  Time elapsed: 0.009 s  <<< ERROR!
+java.lang.NullPointerException: Cannot invoke "com.example.StocksPortfolio.addStock(com.example.Stock)" because "this.portfolio" is null
+	at com.example.StocksPortfolioTest.getTotalValue(StocksPortfolioTest.java:23)
+
