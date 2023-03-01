@@ -1,0 +1,2 @@
+The SuT (subject under test) is AddressResolver, in this case, findAddressForLocation();
+The service to mock is TqsBasicHttpClient;
