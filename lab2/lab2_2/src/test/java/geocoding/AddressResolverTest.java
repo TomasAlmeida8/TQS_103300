@@ -2,6 +2,8 @@ package geocoding;
 
 import connection.ISimpleHttpClient;
 import connection.TqsBasicHttpClient;
+
+import org.apache.http.client.methods.HttpHead;
 import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
@@ -45,7 +47,37 @@ class AddressResolverTest {
 
     @Test
     public void whenBadCoordidates_thenReturnNoValidAddress() throws IOException, URISyntaxException, ParseException {
-        assertThrows(NoSuchElementException.class, () -> resolver.findAddressForLocation(-91, -181));
-        assertThrows(NoSuchElementException.class, () -> resolver.findAddressForLocation(91, 181));
+
+        String response = "{\n" +
+                "\t\"info\": {\n" +
+                "\t\t\"statuscode\": 400,\n" +
+                "\t\t\"copyright\": {\n" +
+                "\t\t\t\"text\": \"© 2022 MapQuest, Inc.\",\n" +
+                "\t\t\t\"imageUrl\": \"http://api.mqcdn.com/res/mqlogo.gif\",\n" +
+                "\t\t\t\"imageAltText\": \"© 2022 MapQuest, Inc.\"\n" +
+                "\t\t},\n" +
+                "\t\t\"messages\": [\n" +
+                "\t\t\t\"Illegal argument from request: Invalid LatLng specified.\"\n" +
+                "\t\t]\n" +
+                "\t},\n" +
+                "\t\"options\": {\n" +
+                "\t\t\"maxResults\": 1,\n" +
+                "\t\t\"ignoreLatLngInput\": false\n" +
+                "\t},\n" +
+                "\t\"results\": [\n" +
+                "\t\t{\n" +
+                "\t\t\t\"providedLocation\": {},\n" +
+                "\t\t\t\"locations\": []\n" +
+                "\t\t}\n" +
+                "\t]\n" +
+                "}";
+
+        when(httpClient.doHttpGet(anyString())).thenReturn(response);
+
+        Optional<Address> result = resolver.findAddressForLocation(-300, -810);
+
+        assertThrows(NoSuchElementException.class, () -> {
+            result.get();
+        });
     }
 }
