@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.List;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-@TestPropertySource(locations = "classpath:application-test.properties")
+@TestPropertySource(locations = "classpath:application-integrationtest.properties")
 public class APITests {
     
     @LocalServerPort
@@ -65,7 +65,7 @@ public class APITests {
         Car gucci = new Car("Fiat", "Gucci");
         carRepository.save(gucci);
 
-        ResponseEntity<Car> response = restTemplate.exchange("/cars/1", HttpMethod.GET, null, Car.class);
+        ResponseEntity<Car> response = restTemplate.exchange("/cars/" + gucci.getCarId(), HttpMethod.GET, null, Car.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 
         List<Car> cars = carRepository.findAll();
