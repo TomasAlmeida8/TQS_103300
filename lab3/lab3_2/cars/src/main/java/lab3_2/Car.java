@@ -9,13 +9,12 @@ import jakarta.persistence.*;
 public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long carId;
 
     private String maker;
     private String model;
 
     public Car() {
-    
     }
 
     public Car(String maker, String model) {
@@ -23,12 +22,12 @@ public class Car {
         this.model = model;
     }
 
-    public long getId() {
-        return id;
+    public long getCarId() {
+        return carId;
     }
     
-    public void setId(long id) {
-        this.id = id;
+    public void setCarId(long carId) {
+        this.carId = carId;
     }
 
     public String getMaker() {
@@ -49,13 +48,13 @@ public class Car {
 
     @Override
     public String toString() {
-        return "Car{" + "id=" + id + ", maker=" + maker + ", model=" + model + '}';
+        return "Car{" + "carId=" + carId + ", maker=" + maker + ", model=" + model + '}';
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 97 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 97 * hash + (int) (this.carId ^ (this.carId >>> 32));
         hash = 97 * hash + Objects.hashCode(this.maker);
         hash = 97 * hash + Objects.hashCode(this.model);
         return hash;
@@ -73,7 +72,7 @@ public class Car {
             return false;
         }
         final Car other = (Car) obj;
-        if (this.id != other.id) {
+        if (this.carId != other.carId) {
             return false;
         }
         if (!Objects.equals(this.maker, other.maker)) {

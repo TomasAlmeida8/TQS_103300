@@ -91,6 +91,7 @@ public class ControllerTests {
 
     @Test
     public void whenBadCarId_thenReturnNull() throws Exception {
+
         when(service.getCarDetails(anyLong())).thenReturn(null);
 
         mvc.perform(get("/cars/2")

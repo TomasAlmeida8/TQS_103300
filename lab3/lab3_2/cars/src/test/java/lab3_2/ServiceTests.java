@@ -27,7 +27,7 @@ public class ServiceTests {
     @BeforeEach
     public void startUp() {
         Car gucci = new Car("Fiat", "Gucci");
-        gucci.setId(69);
+        gucci.setCarId(69);
         Car ferrari = new Car("Ferrari", "F40");
         Car lamborghini = new Car("Lamborghini", "Aventador");
 

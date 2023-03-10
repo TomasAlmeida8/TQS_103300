@@ -16,21 +16,21 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("")
 public class CarController {
     @Autowired
-    private CarService carSerive;
+    private CarService carService;
 
     @PostMapping("/newcar")
     public ResponseEntity<Car> createCar(@RequestBody Car car) {
-        return new ResponseEntity<>(carSerive.save(car), HttpStatus.CREATED);
+        return new ResponseEntity<>(carService.save(car), HttpStatus.CREATED);
     }
 
     @GetMapping("/cars")
     public ResponseEntity<List<Car>> getAllCars() {
-        return new ResponseEntity<>(carSerive.getAllCars(), HttpStatus.OK);
+        return new ResponseEntity<>(carService.getAllCars(), HttpStatus.OK);
     }
 
     @GetMapping("/cars/{id}")
     public ResponseEntity<Car> getCarById(@PathVariable long id) {
-        Car car = carSerive.getCarDetails(id);
+        Car car = carService.getCarDetails(id);
         HttpStatus code;
 
         if (car == null) {
